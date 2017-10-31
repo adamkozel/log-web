@@ -1,0 +1,35 @@
+#!/bin/bash
+
+F=/home/josh/Dropbox/Code/log-web
+
+L=$F/data/log.js
+TIME=$(date +"%H%M")
+N=$(date +"%s")
+D=$(printf '%x\n' $N)
+
+addTime() {
+  sed -i -e "s/undefined/$D/g" $1
+}
+
+if [ $1 = "e" ]; then
+  addTime $L
+  echo "Log ended: $TIME"
+  cd $F
+  git add $L
+  git commit -m "Log"
+  echo "Log updated."
+elif [ $1 = "p" ]; then
+  echo "Uploading to repo..."
+  cd $F
+  git push -u origin master
+  echo "Log entries pushed to repo."
+elif [ $1 = "h" ]; then
+  echo "logweb start \"Sector or Category\" \"Title\" \"Description\"}"
+else
+  SEC="$1"
+  TLE="$2"
+  DSC="$3"
+  sed -i '$d' $L
+  printf "{s:\"$D\",e:\"undefined\",c:\"$SEC\",t:\"$TLE\",d:\"$DSC\"},\n]" >> $L
+  echo "Log started: $TIME"
+fi
