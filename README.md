@@ -13,8 +13,9 @@ Use the terminal to run commands:
 
 ## Install
 1. Fork this repo; do not just download it
-2. Run install.sh
-3. Start a log
+2. If you already use the Electron app, you might already have existing log and config files. Simply copy these into this folder's data folder.
+3. Run install.sh
+4. Start a log
 
 ## View
 You can view your logs online by navigating to the URL below. You may need to set up GH Pages in the settings of your forked repo.
